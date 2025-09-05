@@ -3,68 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Best Friend Message</title>
+  <title>Best Friend Special</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #ffe6f0);
       display: flex;
-      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
     }
-    .photo {
-      flex: 1;
-      background: url("Snapchat-2101844707.jpg") center/cover no-repeat;
+
+    .container {
+      display: flex;
+      max-width: 1000px;
+      width: 90%;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      overflow: hidden;
       animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 1;
     }
-    .card {
+
+    /* Photo section */
+    .photo {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      background: #fff;
+      padding: 15px;
     }
-    .message-box {
-      background: rgba(255, 255, 255, 0.9);
+    .photo img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Message card */
+    .message {
+      flex: 1;
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      max-width: 450px;
-      animation: slideIn 1.5s ease-out;
-    }
-    h1 {
-      color: #ff4e50;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-    p {
-      font-size: 1.1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #333;
+      font-size: 1.1rem;
       line-height: 1.6;
-      color: #444;
-      margin: 10px 0;
+      border-left: 5px solid #ff4d6d;
+      position: relative;
     }
+    .message h2 {
+      margin: 0 0 15px;
+      font-size: 1.6rem;
+      color: #b3003c;
+    }
+
+    /* Button style */
+    .btn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      background: #ff4d6d;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s;
+    }
+    .btn:hover {
+      background: #e63950;
+      transform: scale(1.05);
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 3s linear forwards;
+      pointer-events: none;
+    }
+
     @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes slideIn {
-      from {transform: translateX(100px); opacity: 0;}
-      to {transform: translateX(0); opacity: 1;}
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .message {
+        border-left: none;
+        border-top: 5px solid #ff4d6d;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="photo"></div>
-  <div class="card">
-    <div class="message-box">
-      <h1>💖 For My Best Friend 💖</h1>
-      <p>Hey, mujhe pata hai aap thoda low feel kar rahi hai, lekin yaad rakhiye aap special ho. Aapki smile bahut priceless hai, aur main hamesha chahunga ki aap khush rahe.</p>
-      <p>Bas thoda sa patience, sab theek ho jayega. Main hamesha aapke saath hoon 🤗</p>
-      <p>Aap meri best wali dost hai aur aapke liye main hamesha available hu, toh fikr kis baat ki? 😉</p>
-      <p>Chaliye ek deal karte hain — tu smile kariye, main aapke liye jo bologi 1 hafte wo karunga (bas fayda mat uthna 😆)</p>
+
+  <div class="container">
+    <!-- Left side photo -->
+    <div class="photo">
+      <img src="Snapchat-2101844707.jpg" alt="Best Friend">
+    </div>
+
+    <!-- Right side message -->
+    <div class="message">
+      <h2>Hey Bestie 💖</h2>
+      <p>
+        Mujhe pata hai aap thoda low feel kar rahi hai, 
+        lekin yaad rakhiye aap special ho. Aapki smile priceless hai 
+        aur main hamesha chahunga ki aap khush rahe.  
+      </p>
+      <p>
+        Har din perfect nahi hota, par aap strong ho aur 
+        har situation handle kar sakti ho. Aap jitni caring aur genuine ho, 
+        utna hi positive energy deserve karti ho.  
+      </p>
+      <p>
+        Main hamesha aapke saath hoon 🤗  
+        Chalo ab ek pyari si smile toh dedo 😅🩷
+      </p>
+
+      <!-- Smile button -->
+      <button class="btn" onclick="showHearts()">Smile Now 😍</button>
     </div>
   </div>
+
+  <script>
+    function showHearts() {
+      for (let i = 0; i < 10; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = (window.innerHeight - 50) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 3000);
+      }
+    }
+  </script>
+
 </body>
 </html>
 
