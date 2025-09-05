@@ -14,6 +14,7 @@
       align-items: center;
       min-height: 100vh;
       overflow: hidden;
+      position: relative;
     }
 
     .container {
@@ -26,7 +27,7 @@
       overflow: hidden;
       animation: fadeIn 2s ease-in-out;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Photo section */
@@ -83,12 +84,13 @@
       transform: scale(1.05);
     }
 
-    /* Floating hearts */
-    .heart {
+    /* Floating elements */
+    .floating {
       position: absolute;
       font-size: 24px;
-      animation: floatUp 3s linear forwards;
+      animation: floatUp 6s linear forwards;
       pointer-events: none;
+      z-index: 1;
     }
 
     @keyframes fadeIn {
@@ -97,8 +99,8 @@
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
     }
 
     /* Responsive */
@@ -140,23 +142,44 @@
       </p>
 
       <!-- Smile button -->
-      <button class="btn" onclick="showHearts()">Smile Now 😍</button>
+      <button class="btn" onclick="showAnimation()">Smile Now 😍</button>
     </div>
   </div>
 
   <script>
-    function showHearts() {
-      for (let i = 0; i < 10; i++) {
+    // Background floating hearts + sparkles
+    function createFloating() {
+      let symbols = ["💖", "✨"];
+      let element = document.createElement("div");
+      element.className = "floating";
+      element.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      element.style.left = Math.random() * window.innerWidth + "px";
+      element.style.top = window.innerHeight + "px";
+      element.style.fontSize = (20 + Math.random() * 20) + "px";
+      document.body.appendChild(element);
+
+      setTimeout(() => element.remove(), 6000);
+    }
+    setInterval(createFloating, 800); // har 0.8 sec me ek naya
+
+    // Button click → burst of hearts + sparkles
+    function showAnimation() {
+      for (let i = 0; i < 12; i++) {
         let heart = document.createElement("div");
-        heart.className = "heart";
+        heart.className = "floating";
         heart.innerText = "💖";
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.top = (window.innerHeight - 50) + "px";
         document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
 
-        setTimeout(() => {
-          heart.remove();
-        }, 3000);
+        let sparkle = document.createElement("div");
+        sparkle.className = "floating";
+        sparkle.innerText = "✨";
+        sparkle.style.left = Math.random() * window.innerWidth + "px";
+        sparkle.style.top = (window.innerHeight - 50) + "px";
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 6000);
       }
     }
   </script>
